@@ -233,6 +233,7 @@ PROGRAM binning
      do i = 1, num_bins
         write(output_fileid, *) bin_min + bin_width*(i-0.5), REAL(bin(i))/num_data
      end do
+     write(*,*) "binning results are normalized with total number of data."
   else
      do i = 1, num_bins
         write(output_fileid, *) bin_min + bin_width*(i-0.5), bin(i)
