@@ -160,11 +160,12 @@ PROGRAM binning
      write(*,*) "input file ",i ,":", TRIM(ADJUSTL(input_filename(i)))
   end do
   
-  write(*,*) "numbmer of input files:", num_input_files
-  write(*,*) "number of bins:", num_bins
   ALLOCATE(bin(num_bins))
   
   call get_max_min_num()
+  write(*,*) "number of input files:", num_input_files  
+  write(*,*) "number of data:", num_data
+  write(*,*) "number of bins:", num_bins  
   write(*,*)
   write(*,*) "min datum:", datum_min  
   write(*,*) "max datum:", datum_max
