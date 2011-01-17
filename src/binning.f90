@@ -227,6 +227,7 @@ PROGRAM binning
   open(UNIT=output_fileid, FILE=output_filename, IOSTAT=stat)
   if (stat /= 0) then
      write(*,*) "Error: unable to create output file: ", TRIM(ADJUSTL(output_filename))
+     write(*,*) "IOSTAT=", stat
      call EXIT(1)
   end if
   !the middle value of each bin is bin_min + bin_width*(i-0.5)
