@@ -146,6 +146,7 @@ PROGRAM binning
   if ((.NOT. is_given_n) .OR. (.NOT. is_given_f)) then
      write(*,*) "Error: at least arguments -n and -f are needed!"
      write(*,*) usage
+     call EXIT(1)
   end if
   
   !open every input file
