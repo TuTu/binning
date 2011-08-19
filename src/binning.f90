@@ -6,7 +6,8 @@ PROGRAM binning
   INTEGER :: num_input_files
   INTEGER, DIMENSION(:), ALLOCATABLE :: input_fileid
   CHARACTER(LEN=128), DIMENSION(:), ALLOCATABLE :: input_filename
-  CHARACTER(LEN=128) :: command, arg, usage
+  CHARACTER(LEN=128) :: command, arg
+  CHARACTER(LEN=300) :: usage
   INTEGER :: num_arg, stat, i, j, num_bins, bin_index, bin_overflow_count, num_data
   REAL(KIND=8) :: datum, datum_max, datum_min, bin_max, bin_min, bin_width, swap
   INTEGER, DIMENSION(:), ALLOCATABLE :: bin
