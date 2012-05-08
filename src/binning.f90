@@ -29,7 +29,7 @@ PROGRAM binning
   !-- read parameters from command line arguments --!
   num_arg = COMMAND_ARGUMENT_COUNT()
   if (num_arg < REQUIRED_NUM_PAR) then
-     write(*,*) "Error: number of argumetns is insufficient."
+     write(*,*) "Error: number of arguments is insufficient."
      write(*,*) usage
      call EXIT(1)
   end if
