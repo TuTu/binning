@@ -14,12 +14,17 @@ PROGRAM binning
   CHARACTER(LEN=128) :: output_filename = "bin_results.txt"
   INTEGER, PARAMETER :: output_fileid = 10
   LOGICAL :: is_given_n, is_given_f, is_given_r, is_normalize
+  CHARACTER(LEN=500) :: command_line
+  INTEGER :: num_command_lines 
   
   !check if arguments are given
   is_given_n = .FALSE.
   is_given_f = .FALSE.
   is_given_r = .FALSE.
   is_normalize = .FALSE.
+
+  !get the whole command line for final output as the first line
+  call GET_COMMAND(command_line)
 
   call GET_COMMAND_ARGUMENT(NUMBER=0, VALUE=command)
   usage = "Usage: " // TRIM(ADJUSTL(command)) // " -n <number of bins> &
@@ -232,12 +237,23 @@ PROGRAM binning
      write(*,*) "IOSTAT=", stat
      call EXIT(1)
   end if
+
+  !output the command line as comment
+  num_command_lines = CEILING(LEN(TRIM(ADJUSTL(command_line)))/72.0)
+  do i = 1, num_command_lines
+     if (i < num_command_lines) then
+        write(output_fileid, *) "#" // TRIM(ADJUSTL(command_line((i-1)*72+1 : i*72)))
+     else
+        write(output_fileid, *) "#" // TRIM(ADJUSTL(command_line((i-1)*72+1 : )))
+     end if
+  end do
+
   !the middle value of each bin is bin_min + bin_width*(i-0.5)
   if (is_normalize) then
      do i = 1, num_bins
-        write(output_fileid, *) bin_min + bin_width*(i-0.5), REAL(bin(i))/num_data
+        write(output_fileid, *) bin_min + bin_width*(i-0.5), REAL(bin(i))/(num_data*bin_width)
      end do
-     write(*,*) "binning results are normalized with total number of data."
+     write(*,*) "binning results are normalized with the total distribution area."
   else
      do i = 1, num_bins
         write(output_fileid, *) bin_min + bin_width*(i-0.5), bin(i)
